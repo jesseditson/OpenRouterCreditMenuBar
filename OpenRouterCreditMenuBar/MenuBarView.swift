@@ -23,14 +23,10 @@ struct MenuBarView: View {
                         .font(.caption)
                 }
             } else if let credit = creditManager.currentCredit {
-                VStack(spacing: 4) {
-                    Text("Available Credit")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                    Text("$\(String(format: "%.4f", credit))")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                }
+                UsageHistogramView(
+                    modelUsages: creditManager.modelUsages,
+                    remainingCredit: credit
+                )
             } else if let error = creditManager.errorMessage {
                 VStack(spacing: 4) {
                     Image(systemName: "exclamationmark.triangle")
@@ -73,6 +69,6 @@ struct MenuBarView: View {
             }
         }
         .padding()
-        .frame(width: 200)
+        .frame(width: 280)
     }
 }
